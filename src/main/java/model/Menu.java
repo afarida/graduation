@@ -5,28 +5,13 @@ import java.util.Date;
 /**
  * Created by Admin on 10.02.2017.
  */
-public class Menu {
-    public int id;
-    public String dishName;
-    public int price;
-    public Date date;
-    public Restaurant restaurant;
+public class Menu extends NamedEntity {
 
-    public int getId() {
-        return id;
-    }
+    private int price;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    private Date date = new Date();
 
-    public String getDishName() {
-        return dishName;
-    }
-
-    public void setDishName(String dishName) {
-        this.dishName = dishName;
-    }
+    private Restaurant restaurant;
 
     public int getPrice() {
         return price;
@@ -50,5 +35,14 @@ public class Menu {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    @Override
+    public String toString() {
+        return name + " {" +
+                "restaurant=" + restaurant +
+                ", date=" + date +
+                ", price=" + price +
+                '}';
     }
 }

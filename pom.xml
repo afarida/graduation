@@ -19,6 +19,7 @@
 
         <!--SRPING-->
         <spring.version>4.3.6.RELEASE</spring.version>
+        <spring-data-jpa.version>1.11.0.RELEASE</spring-data-jpa.version>
     </properties>
 
     <build>
@@ -38,11 +39,19 @@
     </build>
 
     <dependencies>
+
+        <!--SRPING-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
+        </dependency>
+
     </dependencies>
     
 </project>

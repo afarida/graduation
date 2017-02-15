@@ -1,21 +1,24 @@
 package service;
 
 import model.Menu;
-import util.exception.NotFoundException;
+import model.Restaurant;
 
+import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Admin on 13.02.2017.
+ * Created by Admin on 15.02.2017.
  */
 public interface MenuService {
-    Menu get(int id) throws NotFoundException;
+    boolean delete(int id);
+
+    List<Menu> findAll();
 
     Menu save(Menu menu);
 
-    Menu update(Menu menu) throws NotFoundException;
+    Menu findOne(Integer id);
 
-    void delete(Menu menu) throws NotFoundException;
+    List<Menu> getByDate(Date date);
 
-    List<Menu> getAll();
+    List<Menu> getByDateAndRestaurant(Date date, Restaurant restaurant);
 }

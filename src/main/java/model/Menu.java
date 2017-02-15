@@ -5,13 +5,23 @@ import java.util.Date;
 /**
  * Created by Admin on 10.02.2017.
  */
-public class Menu extends NamedEntity {
+public class Menu extends BaseEntity {
+
+    private String dish;
 
     private int price;
 
     private Date date = new Date();
 
     private Restaurant restaurant;
+
+    public String getDish() {
+        return dish;
+    }
+
+    public void setDish(String dish) {
+        this.dish = dish;
+    }
 
     public int getPrice() {
         return price;
@@ -39,7 +49,7 @@ public class Menu extends NamedEntity {
 
     @Override
     public String toString() {
-        return name + " {" +
+        return dish + " {" +
                 "restaurant=" + restaurant +
                 ", date=" + date +
                 ", price=" + price +

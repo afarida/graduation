@@ -1,21 +1,18 @@
 package service;
 
 import model.Restaurant;
-import util.exception.NotFoundException;
 
 import java.util.List;
 
 /**
- * Created by Admin on 13.02.2017.
+ * Created by Admin on 15.02.2017.
  */
 public interface RestaurantService {
-    Restaurant get(int id) throws NotFoundException;
+    boolean delete(int id);
+
+    List<Restaurant> findAll();
 
     Restaurant save(Restaurant restaurant);
 
-    Restaurant update(Restaurant restaurant) throws NotFoundException;
-
-    void delete(Restaurant restaurant) throws NotFoundException;
-
-    List<Restaurant> getAll();
+    Restaurant findOne(Integer id);
 }

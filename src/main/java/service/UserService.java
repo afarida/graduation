@@ -1,21 +1,21 @@
 package service;
 
 import model.User;
-import util.exception.NotFoundException;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
 /**
- * Created by Admin on 13.02.2017.
+ * Created by Admin on 15.02.2017.
  */
 public interface UserService {
-    User get(int id) throws NotFoundException;
+    boolean delete(int id);
+
+    List<User> findAll();
 
     User save(User user);
 
-    User update(User user) throws NotFoundException;
+    User findOne(Integer id);
 
-    void delete(User user) throws NotFoundException;
-
-    List<User> getAll();
+    User findByEmail(String email);
 }

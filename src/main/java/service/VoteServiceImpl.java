@@ -1,5 +1,6 @@
 package service;
 
+import model.User;
 import model.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class VoteServiceImpl implements VoteService {
     private VoteRepository repository;
 
     @Override
-    public boolean delete(Date date, int user_id) {
-        return repository.delete(date, user_id) != 0;
+    public boolean delete(Date date, User user) {
+        return repository.delete(date, user) != 0;
     }
 
     @Override

@@ -15,6 +15,6 @@ import java.util.List;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
     @Transactional
     @Modifying
-    @Query("DELETE from restaurants r where r.id=?1")
+    @Query("DELETE from Restaurant r where r.id=?1")
     int delete(int id);
 }

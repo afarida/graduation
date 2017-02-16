@@ -16,7 +16,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Modifying
-    @Query("DELETE from users u where u.id=?1")
+    @Query("DELETE from User u where u.id=?1")
     int delete(int id);
 
     User findByEmail(String email);

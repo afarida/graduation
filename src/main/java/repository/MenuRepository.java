@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-import util.exception.NotFoundException;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 public interface MenuRepository extends JpaRepository<Menu, Integer>{
     @Transactional
     @Modifying
-    @Query("DELETE from menus m where m.id=?1")
+    @Query("DELETE from Menu m where m.id=?1")
     int delete(int id);
 
     List<Menu> getByDate(Date date);

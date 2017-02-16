@@ -1,5 +1,6 @@
 package repository;
 
+import model.User;
 import model.Vote;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,6 +16,6 @@ import java.util.Date;
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
     @Transactional
     @Modifying
-    @Query("DELETE from votes v where v.date=?1 and v.user_id=?2")
-    int delete(Date date, int user_id);
+    @Query("DELETE from Vote v where v.date=?1 and v.user=?2")
+    int delete(Date date, User user);
 }

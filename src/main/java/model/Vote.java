@@ -1,16 +1,27 @@
 package model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Admin on 10.02.2017.
  */
+@Entity
+@Table(name = "votes")
 public class Vote extends BaseEntity {
 
+    @Column(name = "vote", nullable = false)
+    @NotEmpty
     private boolean vote;
 
+    @Column(name = "date", nullable = false)
+    @NotEmpty
     private Date date;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public boolean isVote() {

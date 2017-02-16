@@ -1,22 +1,47 @@
 package model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by Admin on 10.02.2017.
  */
+@Entity
+@Table(name = "users")
 public class User extends NamedEntity {
 
+    @Column(name = "email", nullable = false, unique = true)
+    @Email
+    @NotEmpty
     private String email;
 
+    @Column(name = "password", nullable = false)
+    @NotEmpty
+    @Size(min = 5)
     private String password;
 
+    @Column(name = "registered", nullable = false)
+    @NotEmpty
     private Date registered = new Date();
 
+    @Column(name = "enabled", nullable = false)
+    @NotEmpty
     private boolean enabled = true;
 
-    private Set<Role> authorities;
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Vote> votes;
 
     public String getEmail() {
         return email;
@@ -42,12 +67,24 @@ public class User extends NamedEntity {
         this.registered = registered;
     }
 
-    public Set<Role> getAuthorities() {
-        return authorities;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setAuthorities(Set<Role> authorities) {
-        this.authorities = authorities;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
     }
 
     @Override

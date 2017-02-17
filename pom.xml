@@ -67,6 +67,7 @@
             <version>${hibernate-validator.version}</version>
         </dependency>
 
+        <!--HsqlDB-->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>

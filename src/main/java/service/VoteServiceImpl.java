@@ -5,6 +5,7 @@ import model.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.VoteRepository;
+import util.exception.ExceptionUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,9 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public boolean delete(Date date, User user) {
-        return repository.delete(date, user) != 0;
+        boolean found = repository.delete(date, user) != 0;
+        ExceptionUtil.checkNotFound(found, "date=" + date);
+        return found;
     }
 
     @Override
@@ -29,11 +32,14 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public Vote save(Vote vote) {
-        return repository.save(vote);
+        if (vote.isNew()) {
+            return repository.save(vote);
+        }
+        return repository.save(ExceptionUtil.checkNotFoundWithId(vote, vote.getId()));
     }
 
     @Override
     public Vote findOne(Integer id) {
-        return repository.findOne(id);
+        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 }

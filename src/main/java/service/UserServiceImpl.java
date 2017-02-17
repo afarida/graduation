@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import repository.UserRepository;
+import util.exception.ExceptionUtil;
 
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(int id) {
-        return repository.delete(id) != 0;
+        boolean found = repository.delete(id) != 0;;
+        ExceptionUtil.checkNotFoundWithId(found, id);
+        return found;
     }
 
     @Override
@@ -30,16 +33,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        return repository.save(user);
+        if (user.isNew()) {
+            return repository.save(user);
+        }
+        return repository.save(ExceptionUtil.checkNotFoundWithId(user, user.getId()));
     }
 
     @Override
     public User findOne(Integer id) {
-        return repository.findOne(id);
+        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 
     @Override
     public User findByEmail(String email) {
-        return repository.findByEmail(email);
+        return ExceptionUtil.checkNotFound(repository.findByEmail(email), "email=" + email);
     }
 }

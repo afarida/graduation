@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import repository.RestaurantRepository;
+import util.exception.ExceptionUtil;
 
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public boolean delete(int id) {
-        return repository.delete(id) != 0;
+        boolean found = repository.delete(id) != 0;
+        ExceptionUtil.checkNotFoundWithId(found, id);
+        return found;
     }
 
     @Override
@@ -30,11 +33,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant save(Restaurant restaurant) {
-        return repository.save(restaurant);
+        if (restaurant.isNew()) {
+            return repository.save(restaurant);
+        }
+        return repository.save(ExceptionUtil.checkNotFoundWithId(restaurant, restaurant.getId()));
     }
 
     @Override
     public Restaurant findOne(Integer id) {
-        return repository.findOne(id);
+        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 }

@@ -5,6 +5,7 @@ import model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.MenuRepository;
+import util.exception.ExceptionUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public boolean delete(int id) {
-        return repository.delete(id) != 0;
+        boolean found = repository.delete(id) != 0;
+        ExceptionUtil.checkNotFoundWithId(found, id);
+        return found;
     }
 
     @Override
@@ -29,12 +32,15 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu save(Menu menu) {
-        return repository.save(menu);
+        if (menu.isNew()) {
+            return repository.save(menu);
+        }
+        return repository.save(ExceptionUtil.checkNotFoundWithId(menu, menu.getId()));
     }
 
     @Override
     public Menu findOne(Integer id) {
-        return repository.findOne(id);
+        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 
     @Override

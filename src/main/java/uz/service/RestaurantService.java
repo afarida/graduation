@@ -1,6 +1,6 @@
-package service;
+package uz.service;
 
-import model.Restaurant;
+import uz.model.Restaurant;
 
 import java.util.List;
 

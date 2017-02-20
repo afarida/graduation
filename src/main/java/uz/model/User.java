@@ -1,13 +1,12 @@
-package model;
+package uz.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Admin on 10.02.2017.
@@ -71,8 +70,8 @@ public class User extends NamedEntity {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : EnumSet.copyOf(roles);
     }
 
     public void setEnabled(boolean enabled) {
@@ -85,6 +84,22 @@ public class User extends NamedEntity {
 
     public List<Vote> getVotes() {
         return votes;
+    }
+
+    public User() {
+    }
+
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, true, EnumSet.of(role, roles));
+    }
+
+    public User(Integer id, String name, String email, String password, boolean enabled, Set<Role> roles) {
+        super(name);
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        setRoles(roles);
     }
 
     @Override

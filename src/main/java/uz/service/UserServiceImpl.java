@@ -1,11 +1,12 @@
-package service;
+package uz.service;
 
-import model.User;
+import uz.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import repository.UserRepository;
-import util.exception.ExceptionUtil;
+import org.springframework.util.Assert;
+import uz.repository.UserRepository;
+import uz.util.exception.ExceptionUtil;
 
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(int id) {
-        boolean found = repository.delete(id) != 0;;
+        boolean found = repository.delete(id) != 0;
+        ;
         ExceptionUtil.checkNotFoundWithId(found, id);
         return found;
     }
@@ -33,9 +35,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        if (user.isNew()) {
-            return repository.save(user);
-        }
+        Assert.notNull(user, "user must not be null");
+        return repository.save(user);
+    }
+
+    @Override
+    public User update(User user) {
+        Assert.notNull(user, "user must not be null");
         return repository.save(ExceptionUtil.checkNotFoundWithId(user, user.getId()));
     }
 

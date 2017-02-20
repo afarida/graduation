@@ -1,11 +1,11 @@
-package service;
+package uz.service;
 
-import model.User;
-import model.Vote;
+import uz.model.User;
+import uz.model.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.VoteRepository;
-import util.exception.ExceptionUtil;
+import uz.repository.VoteRepository;
+import uz.util.exception.ExceptionUtil;
 
 import java.util.Date;
 import java.util.List;

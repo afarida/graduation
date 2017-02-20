@@ -1,4 +1,4 @@
-package model;
+package uz.model;
 
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
@@ -10,6 +10,8 @@ import javax.persistence.*;
  */
 @MappedSuperclass
 public class BaseEntity  implements Persistable<Integer> {
+    public static final int START_SEQ = 100;
+
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")

@@ -1,7 +1,7 @@
-package service;
+package uz.service;
 
-import model.Menu;
-import model.Restaurant;
+import uz.model.Menu;
+import uz.model.Restaurant;
 
 import java.util.Date;
 import java.util.List;

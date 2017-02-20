@@ -1,4 +1,4 @@
-package model;
+package uz.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -46,5 +46,13 @@ public class Vote extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Vote() {
+    }
+
+    public Vote(boolean vote, Date date) {
+        this.vote = vote;
+        this.date = date;
     }
 }

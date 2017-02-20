@@ -1,11 +1,11 @@
-package service;
+package uz.service;
 
-import model.Restaurant;
+import uz.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import repository.RestaurantRepository;
-import util.exception.ExceptionUtil;
+import uz.repository.RestaurantRepository;
+import uz.util.exception.ExceptionUtil;
 
 import java.util.List;
 

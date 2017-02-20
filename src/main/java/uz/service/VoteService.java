@@ -1,7 +1,7 @@
-package service;
+package uz.service;
 
-import model.User;
-import model.Vote;
+import uz.model.User;
+import uz.model.Vote;
 
 import java.util.Date;
 import java.util.List;

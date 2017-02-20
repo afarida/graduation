@@ -1,4 +1,4 @@
-package model;
+package uz.model;
 
 /**
  * Created by Admin on 10.02.2017.

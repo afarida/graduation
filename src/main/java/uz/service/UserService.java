@@ -1,7 +1,6 @@
-package service;
+package uz.service;
 
-import model.User;
-import org.springframework.data.domain.Sort;
+import uz.model.User;
 
 import java.util.List;
 
@@ -14,6 +13,8 @@ public interface UserService {
     List<User> findAll();
 
     User save(User user);
+
+    User update(User user);
 
     User findOne(Integer id);
 

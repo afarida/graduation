@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean delete(int id) {
         boolean found = repository.delete(id) != 0;
-        ;
         ExceptionUtil.checkNotFoundWithId(found, id);
         return found;
     }

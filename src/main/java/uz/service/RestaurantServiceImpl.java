@@ -1,5 +1,7 @@
 package uz.service;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import uz.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -31,11 +33,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         return repository.findAll(SORT_NAME);
     }
 
+    @Transactional
     @Override
     public Restaurant save(Restaurant restaurant) {
-        if (restaurant.isNew()) {
-            return repository.save(restaurant);
-        }
+        Assert.notNull(restaurant);
+        return repository.save(restaurant);
+    }
+
+    @Override
+    public Restaurant update(Restaurant restaurant) {
+        Assert.notNull(restaurant);
         return repository.save(ExceptionUtil.checkNotFoundWithId(restaurant, restaurant.getId()));
     }
 

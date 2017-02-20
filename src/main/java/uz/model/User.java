@@ -102,6 +102,10 @@ public class User extends NamedEntity {
         setRoles(roles);
     }
 
+    public User(User u) {
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRoles());
+    }
+
     @Override
     public String toString() {
         return "User{" +

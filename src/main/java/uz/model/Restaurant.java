@@ -16,4 +16,19 @@ public class Restaurant extends NamedEntity {
     public List<Menu> getMenus() {
         return menus;
     }
+
+    public Restaurant() {
+    }
+
+    public Restaurant(String name) {
+        super(name);
+    }
+
+    public Restaurant(Integer id, String name) {
+        super(id, name);
+    }
+
+    public Restaurant(Restaurant r) {
+        this(r.getId(), r.getName());
+    }
 }

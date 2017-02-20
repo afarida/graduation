@@ -25,10 +25,7 @@ import static uz.UserTestData.*;
 /**
  * Created by Admin on 17.02.2017.
  */
-@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = {"classpath:db/initDB.sql", "classpath:db/populateDB.sql"}, config = @SqlConfig(encoding = "UTF-8"))
-public class UserServiceImplTest {
+public class UserServiceImplTest extends AbstractServiceTest {
 
     @Autowired
     private UserService service;
@@ -77,7 +74,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testUpdate() throws Exception {
-        User uUser = USER;
+        User uUser = new User(USER);
         uUser.setName("UpdatedName");
         service.update(uUser);
         MATCHER.assertEquals(uUser, service.findOne(USER_ID));

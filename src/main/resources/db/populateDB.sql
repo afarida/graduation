@@ -8,16 +8,16 @@ ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100;
 
 -- user
 INSERT INTO users (name, email, password)
-VALUES ('User', 'user@yandex.ru', '$2a$10$Sh0ZD2NFrzRRJJEKEWn8l.92ROEuzlVyzB9SV1AM8fdluPR0aC1ni');
+VALUES ('User', 'user@yandex.ru', 'password');
 
 -- admin
 INSERT INTO users (name, email, password)
-VALUES ('Admin', 'admin@gmail.com', '$2a$10$WejOLxVuXRpOgr4IlzQJ.eT4UcukNqHlAiOVZj1P/nmc8WbpMkiju');
+VALUES ('Admin', 'admin@gmail.com', 'admin');
 
 INSERT INTO user_roles (role, user_id) VALUES
-  ('ROLE_USER', 100),
-  ('ROLE_ADMIN', 101),
-  ('ROLE_USER', 101);
+  ('USER', 100),
+  ('ADMIN', 101),
+  ('USER', 101);
 
 
 INSERT INTO restaurants (name) VALUES

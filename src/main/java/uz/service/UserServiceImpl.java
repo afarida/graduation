@@ -1,5 +1,6 @@
 package uz.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import uz.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
         return repository.findAll(SORT_NAME_EMAIL);
     }
 
+    @Transactional
     @Override
     public User save(User user) {
         Assert.notNull(user, "user must not be null");

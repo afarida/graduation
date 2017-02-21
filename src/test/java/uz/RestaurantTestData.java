@@ -19,9 +19,5 @@ public class RestaurantTestData {
     public static final Restaurant YAPONA = new Restaurant(YAPONA_ID, "Yaponamama");
     public static final Restaurant ELKI = new Restaurant(ELKI_ID, "Елки-палки");
 
-    public static final ModelMatcher<Restaurant> MATCHER = ModelMatcher.of(Restaurant.class,
-            (expected, actual) -> (expected == actual) ||
-                    Objects.equals(expected.getId(), actual.getId()) &&
-                            Objects.equals(expected.getName(), actual.getName())
-    );
+    public static final ModelMatcher<Restaurant> MATCHER = ModelMatcher.of(Restaurant.class);
 }

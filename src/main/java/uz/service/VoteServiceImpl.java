@@ -1,9 +1,11 @@
 package uz.service;
 
+import org.springframework.util.Assert;
 import uz.model.User;
 import uz.model.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uz.repository.UserRepository;
 import uz.repository.VoteRepository;
 import uz.util.exception.ExceptionUtil;
 
@@ -18,28 +20,36 @@ public class VoteServiceImpl implements VoteService {
     @Autowired
     private VoteRepository repository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
-    public boolean delete(Date date, User user) {
-        boolean found = repository.delete(date, user) != 0;
-        ExceptionUtil.checkNotFound(found, "date=" + date);
-        return found;
+    public void delete(int id, int userId) {
+        ExceptionUtil.checkNotFoundWithId(repository.delete(id, userId) != 0, id);
     }
 
     @Override
-    public List<Vote> findAll() {
-        return repository.findAll();
+    public List<Vote> findAll(int userId) {
+        return repository.findAll(userId);
     }
 
     @Override
-    public Vote save(Vote vote) {
-        if (vote.isNew()) {
-            return repository.save(vote);
-        }
-        return repository.save(ExceptionUtil.checkNotFoundWithId(vote, vote.getId()));
+    public Vote save(Vote vote, int userId) {
+        Assert.notNull(vote, "vote must not be null");
+        if (!vote.isNew() && vote.getUser().getId() != userId)
+            return null;
+        vote.setUser(userRepository.getOne(userId));
+        return repository.save(vote);
     }
 
     @Override
-    public Vote findOne(Integer id) {
+    public Vote update(Vote vote, int userId) {
+        Assert.notNull(vote);
+        return ExceptionUtil.checkNotFoundWithId(save(vote, userId), vote.getId());
+    }
+
+    @Override
+    public Vote findOne(Integer id, int userId) {
         return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 }

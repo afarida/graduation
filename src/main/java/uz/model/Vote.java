@@ -24,6 +24,10 @@ public class Vote extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant restaurant;
+
     public boolean isVote() {
         return vote;
     }
@@ -48,7 +52,27 @@ public class Vote extends BaseEntity {
         this.user = user;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
     public Vote() {
+    }
+
+    public Vote(Vote vote) {
+        this(vote.getId(), vote.isVote(), vote.getDate(),vote.getUser(), vote.getRestaurant());
+    }
+
+    public Vote(Integer id, boolean vote, Date date, User user, Restaurant restaurant) {
+        super(id);
+        this.vote = vote;
+        this.date = date;
+        this.user = user;
+        this.restaurant = restaurant;
     }
 
     public Vote(boolean vote, Date date) {

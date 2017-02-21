@@ -8,11 +8,11 @@ ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100;
 
 -- user
 INSERT INTO users (name, email, password)
-VALUES ('User', 'user@yandex.ru', 'password');
+VALUES ('User', 'user@yandex.ru', 'password');--100
 
 -- admin
 INSERT INTO users (name, email, password)
-VALUES ('Admin', 'admin@gmail.com', 'admin');
+VALUES ('Admin', 'admin@gmail.com', 'admin');--101
 
 INSERT INTO user_roles (role, user_id) VALUES
   ('USER', 100),
@@ -21,15 +21,15 @@ INSERT INTO user_roles (role, user_id) VALUES
 
 
 INSERT INTO restaurants (name) VALUES
-  ('Versal'),
-  ('Yaponamama'),
-  ('Елки-палки');
+  ('Versal'),--102
+  ('Yaponamama'),--103
+  ('Елки-палки');--104
 
 INSERT INTO  votes (vote, date, user_id, restaurant_id) VALUES
-  (TRUE, '2017-01-15', 100, 104),
-  (TRUE, '2017-01-15', 101, 102),
-  (TRUE, '2017-01-16', 100, 103),
-  (TRUE, '2017-01-16', 101, 102);
+  (TRUE, '2017-01-15', 100, 104),--105
+  (TRUE, '2017-01-15', 101, 102),--106
+  (TRUE, '2017-01-16', 100, 103),--107
+  (TRUE, '2017-01-16', 101, 102);--108
 
 INSERT INTO  menus (date, dish, price, restaurant_id) VALUES
   ('2017-01-15', 'Vegetable salad', 100, 102),

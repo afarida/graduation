@@ -10,11 +10,13 @@ import java.util.List;
  * Created by Admin on 15.02.2017.
  */
 public interface VoteService {
-    boolean delete(Date date, User user);
+    void delete(int id, int userId);
 
-    List<Vote> findAll();
+    List<Vote> findAll(int userId);
 
-    Vote save(Vote vote);
+    Vote save(Vote vote, int userId);
 
-    Vote findOne(Integer id);
+    Vote update(Vote vote, int userId);
+
+    Vote findOne(Integer id, int userId);
 }

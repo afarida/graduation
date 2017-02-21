@@ -49,6 +49,14 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
         MATCHER.assertEquals(uRestaurant, service.findOne(VERSAL_ID));
     }
 
+    @Test(expected = NotFoundException.class)
+    public void testNotFoundUpdate() throws Exception {
+        Restaurant restaurant = new Restaurant(VERSAL);
+        restaurant.setId(1);
+        restaurant.setName("Name");
+        service.update(restaurant);
+    }
+
     @Test
     public void testFindOne() throws Exception {
         MATCHER.assertEquals(YAPONA, service.findOne(YAPONA_ID));

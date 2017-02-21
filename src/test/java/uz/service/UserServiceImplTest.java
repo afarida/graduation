@@ -38,6 +38,14 @@ public class UserServiceImplTest extends AbstractServiceTest {
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.findAll());
     }
 
+    @Test(expected = NotFoundException.class)
+    public void testNotFoundUpdate() throws Exception {
+        User user = new User(USER);
+        user.setId(1);
+        user.setEmail("user1@gmail.com");
+        service.update(user);
+    }
+
     @Test
     public void testDelete() throws Exception {
         service.delete(USER_ID);

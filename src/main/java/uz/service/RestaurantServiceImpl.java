@@ -22,10 +22,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     private RestaurantRepository repository;
 
     @Override
-    public boolean delete(int id) {
-        boolean found = repository.delete(id) != 0;
-        ExceptionUtil.checkNotFoundWithId(found, id);
-        return found;
+    public void delete(int id) {
+        ExceptionUtil.checkNotFoundWithId(repository.delete(id) != 0, id);
     }
 
     @Override
@@ -43,7 +41,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant update(Restaurant restaurant) {
         Assert.notNull(restaurant);
-        return repository.save(ExceptionUtil.checkNotFoundWithId(restaurant, restaurant.getId()));
+        ExceptionUtil.checkNotFoundWithId(repository.findOne(restaurant.getId()), restaurant.getId());
+        return repository.save(restaurant);
     }
 
     @Override

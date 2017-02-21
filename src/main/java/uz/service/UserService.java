@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Admin on 15.02.2017.
  */
 public interface UserService {
-    boolean delete(int id);
+    void delete(int id);
 
     List<User> findAll();
 

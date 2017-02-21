@@ -22,10 +22,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
 
     @Override
-    public boolean delete(int id) {
-        boolean found = repository.delete(id) != 0;
-        ExceptionUtil.checkNotFoundWithId(found, id);
-        return found;
+    public void delete(int id) {
+        ExceptionUtil.checkNotFoundWithId(repository.delete(id) != 0, id);
     }
 
     @Override
@@ -43,7 +41,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         Assert.notNull(user, "user must not be null");
-        return repository.save(ExceptionUtil.checkNotFoundWithId(user, user.getId()));
+        ExceptionUtil.checkNotFoundWithId(repository.findOne(user.getId()), user.getId());
+        return repository.save(user);
     }
 
     @Override

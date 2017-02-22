@@ -3,6 +3,7 @@ package uz.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Date;
 @Entity
 @Table(name = "menus")
 public class Menu extends BaseEntity {
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 
     @Column(name = "dish", nullable = false)
     @NotEmpty
@@ -21,6 +23,7 @@ public class Menu extends BaseEntity {
     private int price;
 
     @Column(name = "date", nullable = false)
+    @Temporal(TemporalType.DATE)
     @NotEmpty
     private Date date = new Date();
 
@@ -59,11 +62,26 @@ public class Menu extends BaseEntity {
         this.restaurant = restaurant;
     }
 
+    public Menu() {
+    }
+
+    public Menu(Integer id, String dish, int price, Date date, Restaurant restaurant) {
+        super(id);
+        this.dish = dish;
+        this.price = price;
+        this.date = date;
+        this.restaurant = restaurant;
+    }
+
+    public Menu(Menu menu){
+        this(menu.getId(), menu.getDish(), menu.getPrice(), menu.getDate(), menu.getRestaurant());
+    }
+
     @Override
     public String toString() {
         return dish + " {" +
                 "restaurant=" + restaurant +
-                ", date=" + date +
+                ", date=" + sdf.format(date) +
                 ", price=" + price +
                 '}';
     }

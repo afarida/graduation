@@ -26,14 +26,14 @@ public class VoteTestData {
     private static Calendar calendar = Calendar.getInstance();
 
     static {
-        calendar.set(2017, 1, 15, 0, 0, 0);
+        calendar.set(2017, 0, 15, 0, 0, 0);
     }
 
     public static final Vote VOTE1 = new Vote(VOTE1_ID, true, calendar.getTime(), USER, ELKI);
     public static final Vote VOTE2 = new Vote(VOTE2_ID, true, calendar.getTime(), ADMIN, VERSAL);
 
     static {
-        calendar.set(2017, 1, 16, 0, 0, 0);
+        calendar.set(2017, 0, 16, 0, 0, 0);
     }
 
     public static final Vote VOTE3 = new Vote(VOTE3_ID, true, calendar.getTime(), USER, YAPONA);

@@ -74,9 +74,4 @@ public class Vote extends BaseEntity {
         this.user = user;
         this.restaurant = restaurant;
     }
-
-    public Vote(boolean vote, Date date) {
-        this.vote = vote;
-        this.date = date;
-    }
 }

@@ -1,5 +1,6 @@
 package uz.service;
 
+import org.springframework.util.Assert;
 import uz.model.Menu;
 import uz.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,8 @@ public class MenuServiceImpl implements MenuService {
     private MenuRepository repository;
 
     @Override
-    public boolean delete(int id) {
-        boolean found = repository.delete(id) != 0;
-        ExceptionUtil.checkNotFoundWithId(found, id);
-        return found;
+    public void delete(int id) {
+        ExceptionUtil.checkNotFoundWithId(repository.delete(id) != 0, id);
     }
 
     @Override
@@ -32,10 +31,15 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu save(Menu menu) {
-        if (menu.isNew()) {
-            return repository.save(menu);
-        }
-        return repository.save(ExceptionUtil.checkNotFoundWithId(menu, menu.getId()));
+        Assert.notNull(menu, "menu must not be null");
+        return repository.save(menu);
+    }
+
+    @Override
+    public Menu update(Menu menu) {
+        Assert.notNull(menu);
+        ExceptionUtil.checkNotFoundWithId(repository.findOne(menu.getId()), menu.getId());
+        return repository.save(menu);
     }
 
     @Override
@@ -49,7 +53,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public List<Menu> getByRestaurant(Restaurant restaurant) {
+        return repository.getByRestaurantId(restaurant.getId());
+    }
+
+    @Override
     public List<Menu> getByDateAndRestaurant(Date date, Restaurant restaurant) {
-        return repository.getByDateAndRestaurant_Id(date, restaurant.getId());
+        return repository.getByDateAndRestaurantId(date, restaurant.getId());
     }
 }

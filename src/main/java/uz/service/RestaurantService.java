@@ -10,11 +10,11 @@ import java.util.List;
 public interface RestaurantService {
     void delete(int id);
 
-    List<Restaurant> findAll();
+    List<Restaurant> getAll();
 
-    Restaurant save(Restaurant restaurant);
+    Restaurant create(Restaurant restaurant);
 
     Restaurant update(Restaurant restaurant);
 
-    Restaurant findOne(Integer id);
+    Restaurant get(Integer id);
 }

@@ -29,12 +29,22 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Vote> findAll(int userId) {
-        return repository.findAll(userId);
+    public List<Vote> getAll(int userId) {
+        return repository.getAll(userId);
     }
 
     @Override
-    public Vote save(Vote vote, int userId) {
+    public List<Vote> getAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public List<Vote> getAllByDate(Date date) {
+        return repository.getAllByDate(date);
+    }
+
+    @Override
+    public Vote create(Vote vote, int userId) {
         Assert.notNull(vote, "vote must not be null");
         if (!vote.isNew() && vote.getUser().getId() != userId)
             return null;
@@ -45,11 +55,11 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public Vote update(Vote vote, int userId) {
         Assert.notNull(vote);
-        return ExceptionUtil.checkNotFoundWithId(save(vote, userId), vote.getId());
+        return ExceptionUtil.checkNotFoundWithId(create(vote, userId), vote.getId());
     }
 
     @Override
-    public Vote findOne(Integer id, int userId) {
-        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
+    public Vote get(Integer id, int userId) {
+        return ExceptionUtil.checkNotFoundWithId(repository.getOne(id), id);
     }
 }

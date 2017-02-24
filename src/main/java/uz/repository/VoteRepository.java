@@ -20,7 +20,10 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     int delete(int id, int userId);
 
     @Query("SELECT v from Vote v where v.user.id=?1 order by v.date")
-    List<Vote> findAll(int userId);
+    List<Vote> getAll(int userId);
+
+    @Query("SELECT v from Vote v where v.date=?1 order by v.user.name")
+    List<Vote> getAllByDate(Date date);
 
     @Query("SELECT v from Vote v where v.id=?1 and v.user.id=?2")
     Vote findOne(Integer id, int userId);

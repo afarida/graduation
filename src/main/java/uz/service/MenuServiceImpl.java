@@ -25,12 +25,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> findAll() {
-        return repository.findAll();
+    public List<Menu> getAll() {
+        return repository.getAll();
     }
 
     @Override
-    public Menu save(Menu menu) {
+    public Menu create(Menu menu) {
         Assert.notNull(menu, "menu must not be null");
         return repository.save(menu);
     }
@@ -43,8 +43,8 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Menu findOne(Integer id) {
-        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
+    public Menu get(Integer id) {
+        return ExceptionUtil.checkNotFoundWithId(repository.getOne(id), id);
     }
 
     @Override
@@ -53,12 +53,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> getByRestaurant(Restaurant restaurant) {
-        return repository.getByRestaurantId(restaurant.getId());
+    public List<Menu> getByRestaurant(int restaurantId) {
+        return repository.getByRestaurantId(restaurantId);
     }
 
     @Override
-    public List<Menu> getByDateAndRestaurant(Date date, Restaurant restaurant) {
-        return repository.getByDateAndRestaurantId(date, restaurant.getId());
+    public List<Menu> getByDateAndRestaurant(Date date, int restaurantId) {
+        return repository.getByDateAndRestaurantId(date, restaurantId);
     }
 }

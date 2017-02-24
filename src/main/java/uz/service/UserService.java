@@ -10,13 +10,13 @@ import java.util.List;
 public interface UserService {
     void delete(int id);
 
-    List<User> findAll();
+    List<User> getAll();
 
-    User save(User user);
+    User create(User user);
 
     User update(User user);
 
-    User findOne(Integer id);
+    User get(Integer id);
 
     User findByEmail(String email);
 }

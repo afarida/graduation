@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Admin on 13.02.2017.
  */
@@ -16,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     int delete(int id);
 
     User findByEmail(String email);
+
+    @Query("SELECT u from User u Order By u.name, u.email")
+    List<User> getAll();
 }

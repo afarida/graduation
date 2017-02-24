@@ -20,7 +20,7 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(VERSAL_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(YAPONA, ELKI), service.findAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(YAPONA, ELKI), service.getAll());
     }
 
     @Test(expected = NotFoundException.class)
@@ -30,15 +30,15 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testFindAll() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(VERSAL, YAPONA, ELKI), service.findAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(VERSAL, YAPONA, ELKI), service.getAll());
     }
 
     @Test
     public void testSave() throws Exception {
         Restaurant newRestaurant = new Restaurant("New");
-        Restaurant createdRestaurant = service.save(newRestaurant);
+        Restaurant createdRestaurant = service.create(newRestaurant);
         newRestaurant.setId(createdRestaurant.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(newRestaurant, VERSAL, YAPONA, ELKI), service.findAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(newRestaurant, VERSAL, YAPONA, ELKI), service.getAll());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
         Restaurant uRestaurant = new Restaurant(VERSAL);
         uRestaurant.setName("UpdateName");
         service.update(uRestaurant);
-        MATCHER.assertEquals(uRestaurant, service.findOne(VERSAL_ID));
+        MATCHER.assertEquals(uRestaurant, service.get(VERSAL_ID));
     }
 
     @Test(expected = NotFoundException.class)
@@ -59,6 +59,6 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testFindOne() throws Exception {
-        MATCHER.assertEquals(YAPONA, service.findOne(YAPONA_ID));
+        MATCHER.assertEquals(YAPONA, service.get(YAPONA_ID));
     }
 }

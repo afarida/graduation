@@ -33,9 +33,9 @@ public class UserServiceImplTest extends AbstractServiceTest {
     @Test
     public void testSave() throws Exception {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", Role.USER);
-        User createdUser = service.save(newUser);
+        User createdUser = service.create(newUser);
         newUser.setId(createdUser.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.findAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.getAll());
     }
 
     @Test(expected = NotFoundException.class)
@@ -49,7 +49,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(USER_ID);
-        MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.findAll());
+        MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
     }
 
     @Test(expected = NotFoundException.class)
@@ -59,18 +59,18 @@ public class UserServiceImplTest extends AbstractServiceTest {
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateMailSave() throws Exception {
-        service.save(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.USER));
+        service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.USER));
     }
 
     @Test
     public void testFindAll() throws Exception {
-        List<User> users = service.findAll();
+        List<User> users = service.getAll();
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, USER), users);
     }
 
     @Test
     public void testFindOne() throws Exception {
-        User user = service.findOne(ADMIN_ID);
+        User user = service.get(ADMIN_ID);
         MATCHER.assertEquals(ADMIN, user);
     }
 
@@ -85,6 +85,6 @@ public class UserServiceImplTest extends AbstractServiceTest {
         User uUser = new User(USER);
         uUser.setName("UpdatedName");
         service.update(uUser);
-        MATCHER.assertEquals(uUser, service.findOne(USER_ID));
+        MATCHER.assertEquals(uUser, service.get(USER_ID));
     }
 }

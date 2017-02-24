@@ -16,7 +16,6 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    private static final Sort SORT_NAME_EMAIL = new Sort("name", "email");
 
     @Autowired
     private UserRepository repository;
@@ -27,13 +26,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        return repository.findAll(SORT_NAME_EMAIL);
+    public List<User> getAll() {
+        return repository.getAll();
     }
 
     @Transactional
     @Override
-    public User save(User user) {
+    public User create(User user) {
         Assert.notNull(user, "user must not be null");
         return repository.save(user);
     }
@@ -41,13 +40,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         Assert.notNull(user, "user must not be null");
-        ExceptionUtil.checkNotFoundWithId(repository.findOne(user.getId()), user.getId());
+        ExceptionUtil.checkNotFoundWithId(repository.getOne(user.getId()), user.getId());
         return repository.save(user);
     }
 
     @Override
-    public User findOne(Integer id) {
-        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
+    public User get(Integer id) {
+        return ExceptionUtil.checkNotFoundWithId(repository.getOne(id), id);
     }
 
     @Override

@@ -12,17 +12,17 @@ import java.util.List;
 public interface MenuService {
     void delete(int id);
 
-    List<Menu> findAll();
+    List<Menu> getAll();
 
-    Menu save(Menu menu);
+    Menu create(Menu menu);
 
     Menu update(Menu menu);
 
-    Menu findOne(Integer id);
+    Menu get(Integer id);
 
     List<Menu> getByDate(Date date);
 
-    List<Menu> getByRestaurant(Restaurant restaurant);
+    List<Menu> getByRestaurant(int restaurantId);
 
-    List<Menu> getByDateAndRestaurant(Date date, Restaurant restaurant);
+    List<Menu> getByDateAndRestaurant(Date date, int restaurantId);
 }

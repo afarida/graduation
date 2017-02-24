@@ -16,8 +16,6 @@ import java.util.List;
  */
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
-    private static final Sort SORT_NAME = new Sort("name");
-
     @Autowired
     private RestaurantRepository repository;
 
@@ -27,13 +25,13 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> findAll() {
-        return repository.findAll(SORT_NAME);
+    public List<Restaurant> getAll() {
+        return repository.getAll();
     }
 
     @Transactional
     @Override
-    public Restaurant save(Restaurant restaurant) {
+    public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant);
         return repository.save(restaurant);
     }
@@ -41,12 +39,12 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant update(Restaurant restaurant) {
         Assert.notNull(restaurant);
-        ExceptionUtil.checkNotFoundWithId(repository.findOne(restaurant.getId()), restaurant.getId());
+        ExceptionUtil.checkNotFoundWithId(repository.getOne(restaurant.getId()), restaurant.getId());
         return repository.save(restaurant);
     }
 
     @Override
-    public Restaurant findOne(Integer id) {
-        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
+    public Restaurant get(Integer id) {
+        return ExceptionUtil.checkNotFoundWithId(repository.getOne(id), id);
     }
 }

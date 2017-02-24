@@ -9,9 +9,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 import static uz.MenuTestData.*;
-import static uz.RestaurantTestData.ELKI;
-import static uz.RestaurantTestData.VERSAL;
-import static uz.RestaurantTestData.YAPONA;
+import static uz.MenuTestData.MATCHER;
+import static uz.RestaurantTestData.*;
 
 /**
  * Created by Admin on 22.02.2017.
@@ -25,7 +24,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(MENU13_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(MENU12, MENU11, MENU14, MENU15), service.getByRestaurant(ELKI));
+        MATCHER.assertCollectionEquals(Arrays.asList(MENU12, MENU11, MENU14, MENU15), service.getByRestaurant(ELKI_ID));
     }
 
     @Test(expected = NotFoundException.class)
@@ -35,16 +34,17 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testFindAll() throws Exception {
-        MATCHER.assertCollectionEquals(MENUS, service.findAll());
+        MATCHER.assertCollectionEquals(MENUS, service.getAll());
     }
 
     @Test
     public void testSave() throws Exception {
         CALENDAR.set(2017, 1, 18, 0, 0, 0);
         Menu menu = new Menu(null, "New dish name", 100, CALENDAR.getTime(), ELKI);
-        Menu createdMenu = service.save(menu);
+        Menu createdMenu = service.create(menu);
         menu.setId(createdMenu.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(MENU12, MENU11, MENU14, MENU13, MENU15, menu), service.getByRestaurant(ELKI));
+        MATCHER.assertCollectionEquals(Arrays.asList(MENU12, MENU11, MENU14, MENU13, MENU15, menu),
+                service.getByRestaurant(ELKI_ID));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
         Menu menu = new Menu(MENU1);
         menu.setDish("Update dish name");
         service.update(menu);
-        MATCHER.assertEquals(menu, service.findOne(MENU1_ID));
+        MATCHER.assertEquals(menu, service.get(MENU1_ID));
     }
 
     @Test(expected = NotFoundException.class)
@@ -65,7 +65,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testFindOne() throws Exception {
-        MATCHER.assertEquals(MENU2, service.findOne(MENU2_ID));
+        MATCHER.assertEquals(MENU2, service.get(MENU2_ID));
     }
 
     @Test
@@ -78,14 +78,14 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     @Test
     public void testGetByRestaurant() throws Exception {
         MATCHER.assertCollectionEquals(Arrays.asList(MENU7, MENU8, MENU6, MENU10, MENU9),
-                service.getByRestaurant(YAPONA));
+                service.getByRestaurant(YAPONA_ID));
     }
 
     @Test
     public void testGetByDateAndRestaurant() throws Exception {
         CALENDAR.set(2017, 0, 15, 0, 0, 0);
         MATCHER.assertCollectionEquals(Arrays.asList(MENU2, MENU3, MENU1),
-                service.getByDateAndRestaurant(CALENDAR.getTime(),VERSAL));
+                service.getByDateAndRestaurant(CALENDAR.getTime(),VERSAL_ID));
     }
 
 }

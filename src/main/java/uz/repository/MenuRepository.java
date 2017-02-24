@@ -22,7 +22,7 @@ public interface MenuRepository extends JpaRepository<Menu, Integer>{
     int delete(int id);
 
     @Query("SELECT m from Menu m order by m.date, m.restaurant.name, m.dish")
-    List<Menu> findAll();
+    List<Menu> getAll();
 
     @Query("SELECT m from Menu m where m.date=?1 order by m.restaurant.name, m.dish")
     List<Menu> getByDate(Date date);

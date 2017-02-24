@@ -17,7 +17,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Query("DELETE from Restaurant r where r.id=?1")
     int delete(int id);
 
-    @Override
     @Query("SELECT r from Restaurant r Order By r.name")
-    List<Restaurant> findAll();
+    List<Restaurant> getAll();
 }

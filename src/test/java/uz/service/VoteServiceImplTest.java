@@ -25,7 +25,7 @@ public class VoteServiceImplTest extends AbstractServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(VOTE1_ID, USER_ID);
-        MATCHER.assertCollectionEquals(Collections.singletonList(VOTE3), service.findAll(USER_ID));
+        MATCHER.assertCollectionEquals(Collections.singletonList(VOTE3), service.getAll(USER_ID));
     }
 
     @Test(expected = NotFoundException.class)
@@ -35,12 +35,12 @@ public class VoteServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testFindAll() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(VOTE1, VOTE3), service.findAll(USER_ID));
+        MATCHER.assertCollectionEquals(Arrays.asList(VOTE1, VOTE3), service.getAll(USER_ID));
     }
 
     @Test
     public void testNullFindAll() throws Exception {
-        MATCHER.assertCollectionEquals(Collections.EMPTY_LIST, service.findAll(1));
+        MATCHER.assertCollectionEquals(Collections.EMPTY_LIST, service.getAll(1));
     }
 
     @Test
@@ -48,9 +48,9 @@ public class VoteServiceImplTest extends AbstractServiceTest {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017, 1, 18);
         Vote vote = new Vote(null, true, calendar.getTime(), ADMIN, VERSAL);
-        Vote createsVote = service.save(vote, ADMIN_ID);
+        Vote createsVote = service.create(vote, ADMIN_ID);
         vote.setId(createsVote.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(VOTE2, VOTE4, vote), service.findAll(ADMIN_ID));
+        MATCHER.assertCollectionEquals(Arrays.asList(VOTE2, VOTE4, vote), service.getAll(ADMIN_ID));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class VoteServiceImplTest extends AbstractServiceTest {
         Vote uVote = new Vote(VOTE2);
         uVote.setRestaurant(YAPONA);
         service.update(uVote, ADMIN_ID);
-        MATCHER.assertEquals(uVote, service.findOne(VOTE2_ID, ADMIN_ID));
+        MATCHER.assertEquals(uVote, service.get(VOTE2_ID, ADMIN_ID));
     }
 
     @Test(expected = NotFoundException.class)
@@ -68,7 +68,7 @@ public class VoteServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testFindOne() throws Exception {
-        MATCHER.assertEquals(VOTE2, service.findOne(VOTE2_ID, ADMIN_ID));
+        MATCHER.assertEquals(VOTE2, service.get(VOTE2_ID, ADMIN_ID));
     }
 
 }

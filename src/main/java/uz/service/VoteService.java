@@ -12,11 +12,15 @@ import java.util.List;
 public interface VoteService {
     void delete(int id, int userId);
 
-    List<Vote> findAll(int userId);
+    List<Vote> getAll(int userId);
 
-    Vote save(Vote vote, int userId);
+    List<Vote> getAll();
+
+    List<Vote> getAllByDate(Date date);
+
+    Vote create(Vote vote, int userId);
 
     Vote update(Vote vote, int userId);
 
-    Vote findOne(Integer id, int userId);
+    Vote get(Integer id, int userId);
 }

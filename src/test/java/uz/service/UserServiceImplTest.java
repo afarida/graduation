@@ -31,7 +31,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
     private UserService service;
 
     @Test
-    public void testSave() throws Exception {
+    public void testCreate() throws Exception {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", Role.USER);
         User createdUser = service.create(newUser);
         newUser.setId(createdUser.getId());
@@ -58,18 +58,18 @@ public class UserServiceImplTest extends AbstractServiceTest {
     }
 
     @Test(expected = DataAccessException.class)
-    public void testDuplicateMailSave() throws Exception {
+    public void testDuplicateMailCreate() throws Exception {
         service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.USER));
     }
 
     @Test
-    public void testFindAll() throws Exception {
+    public void testGetAll() throws Exception {
         List<User> users = service.getAll();
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, USER), users);
     }
 
     @Test
-    public void testFindOne() throws Exception {
+    public void testGet() throws Exception {
         User user = service.get(ADMIN_ID);
         MATCHER.assertEquals(ADMIN, user);
     }

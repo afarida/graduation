@@ -33,12 +33,12 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testFindAll() throws Exception {
+    public void testGetAll() throws Exception {
         MATCHER.assertCollectionEquals(MENUS, service.getAll());
     }
 
     @Test
-    public void testSave() throws Exception {
+    public void testCreate() throws Exception {
         CALENDAR.set(2017, 1, 18, 0, 0, 0);
         Menu menu = new Menu(null, "New dish name", 100, CALENDAR.getTime(), ELKI);
         Menu createdMenu = service.create(menu);
@@ -64,7 +64,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testFindOne() throws Exception {
+    public void testGet() throws Exception {
         MATCHER.assertEquals(MENU2, service.get(MENU2_ID));
     }
 

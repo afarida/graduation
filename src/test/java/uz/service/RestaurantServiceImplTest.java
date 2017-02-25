@@ -29,12 +29,12 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testFindAll() throws Exception {
+    public void testGetAll() throws Exception {
         MATCHER.assertCollectionEquals(Arrays.asList(VERSAL, YAPONA, ELKI), service.getAll());
     }
 
     @Test
-    public void testSave() throws Exception {
+    public void testCreate() throws Exception {
         Restaurant newRestaurant = new Restaurant("New");
         Restaurant createdRestaurant = service.create(newRestaurant);
         newRestaurant.setId(createdRestaurant.getId());
@@ -58,7 +58,7 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testFindOne() throws Exception {
+    public void testGet() throws Exception {
         MATCHER.assertEquals(YAPONA, service.get(YAPONA_ID));
     }
 }

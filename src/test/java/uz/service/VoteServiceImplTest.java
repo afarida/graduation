@@ -34,17 +34,17 @@ public class VoteServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testFindAll() throws Exception {
+    public void testGetAll() throws Exception {
         MATCHER.assertCollectionEquals(Arrays.asList(VOTE1, VOTE3), service.getAll(USER_ID));
     }
 
     @Test
-    public void testNullFindAll() throws Exception {
+    public void testNullGetAll() throws Exception {
         MATCHER.assertCollectionEquals(Collections.EMPTY_LIST, service.getAll(1));
     }
 
     @Test
-    public void testSave() throws Exception {
+    public void testCreate() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017, 1, 18);
         Vote vote = new Vote(null, true, calendar.getTime(), ADMIN, VERSAL);
@@ -67,7 +67,7 @@ public class VoteServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testFindOne() throws Exception {
+    public void testGet() throws Exception {
         MATCHER.assertEquals(VOTE2, service.get(VOTE2_ID, ADMIN_ID));
     }
 

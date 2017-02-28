@@ -40,13 +40,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         Assert.notNull(user, "user must not be null");
-        ExceptionUtil.checkNotFoundWithId(repository.getOne(user.getId()), user.getId());
+        ExceptionUtil.checkNotFoundWithId(repository.findOne(user.getId()), user.getId());
         return repository.save(user);
     }
 
     @Override
     public User get(Integer id) {
-        return ExceptionUtil.checkNotFoundWithId(repository.getOne(id), id);
+        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu get(Integer id) {
-        return ExceptionUtil.checkNotFoundWithId(repository.getOne(id), id);
+        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 
     @Override

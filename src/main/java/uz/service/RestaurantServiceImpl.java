@@ -39,12 +39,12 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant update(Restaurant restaurant) {
         Assert.notNull(restaurant);
-        ExceptionUtil.checkNotFoundWithId(repository.getOne(restaurant.getId()), restaurant.getId());
+        ExceptionUtil.checkNotFoundWithId(repository.findOne(restaurant.getId()), restaurant.getId());
         return repository.save(restaurant);
     }
 
     @Override
     public Restaurant get(Integer id) {
-        return ExceptionUtil.checkNotFoundWithId(repository.getOne(id), id);
+        return ExceptionUtil.checkNotFoundWithId(repository.findOne(id), id);
     }
 }

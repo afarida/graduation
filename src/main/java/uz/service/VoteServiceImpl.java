@@ -46,7 +46,7 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public Vote create(Vote vote, int userId) {
         Assert.notNull(vote, "vote must not be null");
-        if (!vote.isNew() && vote.getUser().getId() != userId)
+        if (vote.getUser() != null && vote.getUser().getId() != userId)
             return null;
         vote.setUser(userRepository.findOne(userId));
         return repository.save(vote);

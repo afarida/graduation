@@ -73,13 +73,13 @@ public class VoteControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testCreateE() throws Exception {
+    public void testCreateUnprocessableEntity() throws Exception {
         Vote newVote = new Vote(null, true, new Date(), ADMIN, VERSAL);
         mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(newVote))
                 .with(userHttpBasic(USER)))
-                .andExpect(status().isCreated())
+                .andExpect(status().isUnprocessableEntity())
                 .andDo(print());
     }
 
@@ -118,7 +118,7 @@ public class VoteControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testGetAllByDateU() throws Exception {
+    public void testGetAllByDateNotAcceptable() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017, 0, 15, 0, 0, 0);
 

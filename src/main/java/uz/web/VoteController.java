@@ -40,7 +40,7 @@ public class VoteController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vote> getAll() {
-        if (AuthorizedUser.get().getUserTo().getRoles().contains(Role.ROLE_ADMIN)){
+        if (AuthorizedUser.get().getUserTo().getRoles().contains(Role.ROLE_ADMIN)) {
             LOG.info("getAll");
             return service.getAll();
         }
@@ -53,6 +53,10 @@ public class VoteController {
     public ResponseEntity<Vote> create(@RequestBody Vote vote) {
         LOG.info("create {} for User {}", vote, AuthorizedUser.id());
         Vote created = service.create(vote, AuthorizedUser.id());
+
+        if (created == null) {
+            return new ResponseEntity<>(created, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
         URI newUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "{id}")

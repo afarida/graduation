@@ -69,20 +69,12 @@ public class MenuController {
     }
 
     @GetMapping(value = {REST_ADMIN_URL + "/by", REST_URL + "/by"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Menu> getByDate(@RequestParam("date") Date date) {
-        LOG.info("getByDate " + date);
-        return service.getByDate(date);
-    }
-
-    @GetMapping(value = {REST_ADMIN_URL + "/by", REST_URL + "/by"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Menu> getByRestaurant(@RequestParam("restaurant") int restaurantId) {
-        LOG.info("getByRestaurant " + restaurantId);
-        return service.getByRestaurant(restaurantId);
-    }
-
-    @GetMapping(value = {REST_ADMIN_URL + "/by", REST_URL + "/by"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Menu> getByDateAndRestaurant(@RequestParam("date") Date date, @RequestParam("restaurantId") int restaurantId) {
+    List<Menu> getByDateAndRestaurant(@RequestParam("date") Date date, @RequestParam("restaurantId") Integer restaurantId) {
         LOG.info("getByDateAndRestaurant by Date {} and Restaurant {}", date, restaurantId);
+        if (date == null) {
+            return service.getByRestaurant(restaurantId);
+        } else if (restaurantId == null)
+            return service.getByDate(date);
         return service.getByDateAndRestaurant(date, restaurantId);
     }
 }

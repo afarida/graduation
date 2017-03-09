@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Admin on 23.02.2017.
  */
 public abstract class AbstractUserController {
-    protected static final Logger LOG = LoggerFactory.getLogger(AdminUserController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AbstractUserController.class);
 
     @Autowired
     private UserService service;

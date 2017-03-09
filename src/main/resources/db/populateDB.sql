@@ -15,9 +15,9 @@ INSERT INTO users (name, email, password)
 VALUES ('Admin', 'admin@gmail.com', 'admin');--101
 
 INSERT INTO user_roles (role, user_id) VALUES
-  ('USER', 100),
-  ('ADMIN', 101),
-  ('USER', 101);
+  ('ROLE_USER', 100),
+  ('ROLE_ADMIN', 101),
+  ('ROLE_USER', 101);
 
 
 INSERT INTO restaurants (name) VALUES

@@ -20,8 +20,8 @@ import java.util.List;
  */
 @RestController
 public class RestaurantController {
-    private static final String REST_ADMIN_URL = "/admin/restaurants";
-    private static final String REST_URL = "/restaurants";
+    static final String REST_ADMIN_URL = "/admin/restaurants";
+    static final String REST_URL = "/restaurants";
 
     private static final Logger LOG = LoggerFactory.getLogger(RestaurantController.class);
 
@@ -34,7 +34,7 @@ public class RestaurantController {
         service.delete(id);
     }
 
-    @GetMapping(value = {REST_ADMIN_URL, REST_URL}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
     List<Restaurant> getAll() {
         LOG.info("getAll");
         return service.getAll();
@@ -62,7 +62,7 @@ public class RestaurantController {
         return service.create(restaurant);
     }
 
-    @GetMapping(value = {REST_ADMIN_URL + "/{id}", REST_URL + "/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = REST_URL + "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     Restaurant get(@PathVariable Integer id) {
         LOG.info("get " + id);
         return service.get(id);

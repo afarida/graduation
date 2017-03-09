@@ -15,8 +15,8 @@ import java.util.List;
  * Created by Admin on 23.02.2017.
  */
 @RestController
-@RequestMapping(AdminUserController.REST_URL)
-public class AdminUserController extends AbstractUserController {
+@RequestMapping(AdminController.REST_URL)
+public class AdminController extends AbstractUserController {
     static final String REST_URL = "/admin/users";
 
     @DeleteMapping("/{id}")

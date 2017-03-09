@@ -28,4 +28,9 @@ public class UserController extends AbstractUserController {
     public User get() {
         return super.get(AuthorizedUser.id());
     }
+
+    @GetMapping(value = "/text")
+    public String testUTF() {
+        return "Русский текст";
+    }
 }

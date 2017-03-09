@@ -1,24 +1,15 @@
 package uz.service;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
 import uz.model.Role;
 import uz.model.User;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import uz.service.UserService;
 import uz.util.exception.NotFoundException;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.regex.Matcher;
 
 import static uz.UserTestData.*;
 
@@ -32,7 +23,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testCreate() throws Exception {
-        User newUser = new User(null, "New", "new@gmail.com", "newPass", Role.USER);
+        User newUser = new User(null, "NewNameService", "new@gmail.com", "newPass", Role.ROLE_USER);
         User createdUser = service.create(newUser);
         newUser.setId(createdUser.getId());
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.getAll());
@@ -59,7 +50,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateMailCreate() throws Exception {
-        service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.USER));
+        service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 
     @Test
@@ -83,7 +74,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
     @Test
     public void testUpdate() throws Exception {
         User uUser = new User(USER);
-        uUser.setName("UpdatedName");
+        uUser.setName("updatedNameService");
         service.update(uUser);
         MATCHER.assertEquals(uUser, service.get(USER_ID));
     }

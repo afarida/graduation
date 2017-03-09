@@ -6,6 +6,9 @@
 
     <context:annotation-config/>
 
+    <import resource="spring-security.xml"/>
+    <import resource="spring-mvc.xml"/>
+
     <context:component-scan base-package="uz.repository"/>
     <context:component-scan base-package="uz.service"/>
 </beans>

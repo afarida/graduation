@@ -2,6 +2,7 @@ package uz.matcher;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import uz.web.json.JsonUtil;
 
 /**
  * GKislin
@@ -23,6 +24,6 @@ abstract public class TestMatcher<T> extends BaseMatcher<String> {
 
     @Override
     public void describeTo(Description description) {
-        //description.appendText(JsonUtil.writeValue(expected));
+        description.appendText(JsonUtil.writeValue(expected));
     }
 }

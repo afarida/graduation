@@ -3,6 +3,7 @@ package uz.web;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
 import uz.model.Restaurant;
 import uz.service.RestaurantService;
 import uz.web.json.JsonUtil;
@@ -53,11 +54,15 @@ public class RestaurantControllerTest extends AbstractControllerTest {
     @Test
     public void testCreate() throws Exception {
         Restaurant newRestaurant = new Restaurant("NewRestaurant");
-        mockMvc.perform(post(REST_URL).with(userHttpBasic(ADMIN))
+
+        ResultActions action = mockMvc.perform(post(REST_URL).with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(newRestaurant)))
                 .andExpect(status().isCreated())
                 .andDo(print());
+        Restaurant created = MATCHER.fromJsonAction(action);
+        newRestaurant.setId(created.getId());
+
         MATCHER.assertCollectionEquals(Arrays.asList(newRestaurant, VERSAL, YAPONA, ELKI), service.getAll());
     }
 

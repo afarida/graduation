@@ -35,7 +35,7 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public List<Vote> getAll() {
-        return repository.findAll();
+        return repository.getAll();
     }
 
     @Override

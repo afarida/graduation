@@ -3,6 +3,7 @@ package uz;
 import uz.matcher.ModelMatcher;
 import uz.model.Vote;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -22,6 +23,8 @@ public class VoteTestData {
     public static final int VOTE2_ID = START_SEQ + 6;
     public static final int VOTE3_ID = START_SEQ + 7;
     public static final int VOTE4_ID = START_SEQ + 8;
+
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("YYYY-MM-DD");
 
     private static Calendar calendar = Calendar.getInstance();
 

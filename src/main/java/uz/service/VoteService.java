@@ -1,5 +1,6 @@
 package uz.service;
 
+import org.springframework.security.access.annotation.Secured;
 import uz.model.User;
 import uz.model.Vote;
 
@@ -14,8 +15,10 @@ public interface VoteService {
 
     List<Vote> getAll(int userId);
 
+    @Secured("ROLE_ADMIN")
     List<Vote> getAll();
 
+    @Secured("ROLE_ADMIN")
     List<Vote> getAllByDate(Date date);
 
     Vote create(Vote vote, int userId);

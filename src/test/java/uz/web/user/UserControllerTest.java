@@ -3,20 +3,14 @@ package uz.web.user;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletRequest;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-
-import uz.AuthorizedUser;
 import uz.model.User;
 import uz.service.UserService;
 import uz.web.AbstractControllerTest;
 import uz.web.json.JsonUtil;
 
-import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

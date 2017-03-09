@@ -20,7 +20,6 @@ import java.util.List;
  */
 @RestController
 public class RestaurantController {
-    static final String REST_ADMIN_URL = "/admin/restaurants";
     static final String REST_URL = "/restaurants";
 
     private static final Logger LOG = LoggerFactory.getLogger(RestaurantController.class);
@@ -28,7 +27,7 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
-    @DeleteMapping(REST_ADMIN_URL + "/{id}")
+    @DeleteMapping(REST_URL + "/{id}")
     void delete(@PathVariable("id") int id) {
         LOG.info("delete " + id);
         service.delete(id);
@@ -40,14 +39,14 @@ public class RestaurantController {
         return service.getAll();
     }
 
-    @PostMapping(value = REST_ADMIN_URL, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = REST_URL, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Restaurant> create(@RequestBody Restaurant restaurant) {
         LOG.info("create " + restaurant);
 
         Restaurant created = service.create(restaurant);
 
         URI newUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_ADMIN_URL + "/{id}")
+                .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId())
                 .toUri();
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -56,7 +55,7 @@ public class RestaurantController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = REST_ADMIN_URL, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = REST_URL, consumes = MediaType.APPLICATION_JSON_VALUE)
     Restaurant update(@RequestBody Restaurant restaurant) {
         LOG.info("update " + restaurant);
         return service.create(restaurant);

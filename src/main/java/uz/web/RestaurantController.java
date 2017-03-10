@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Admin on 23.02.2017.
  */
 @RestController
+@RequestMapping(RestaurantController.REST_URL)
 public class RestaurantController {
     static final String REST_URL = "/restaurants";
 
@@ -27,20 +28,20 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
-    @DeleteMapping(REST_URL + "/{id}")
-    void delete(@PathVariable("id") int id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") int id) {
         LOG.info("delete " + id);
         service.delete(id);
     }
 
-    @GetMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Restaurant> getAll() {
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAll() {
         LOG.info("getAll");
         return service.getAll();
     }
 
-    @PostMapping(value = REST_URL, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Restaurant> create(@RequestBody Restaurant restaurant) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Restaurant> create(@RequestBody Restaurant restaurant) {
         LOG.info("create " + restaurant);
 
         Restaurant created = service.create(restaurant);
@@ -55,14 +56,14 @@ public class RestaurantController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = REST_URL, consumes = MediaType.APPLICATION_JSON_VALUE)
-    Restaurant update(@RequestBody Restaurant restaurant) {
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant update(@RequestBody Restaurant restaurant) {
         LOG.info("update " + restaurant);
         return service.create(restaurant);
     }
 
-    @GetMapping(value = REST_URL + "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    Restaurant get(@PathVariable Integer id) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant get(@PathVariable Integer id) {
         LOG.info("get " + id);
         return service.get(id);
     }

@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uz.RestaurantTestData.VERSAL;
 import static uz.RestaurantTestData.YAPONA;
+import static uz.TestUtil.SIMPLE_DATE_FORMAT;
 import static uz.TestUtil.userHttpBasic;
 import static uz.UserTestData.*;
 import static uz.VoteTestData.MATCHER;
@@ -107,10 +108,7 @@ public class VoteControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAllByDate() throws Exception {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2017, 0, 15, 0, 0, 0);
-
-        mockMvc.perform(get(REST_URL + "by?date=" + SIMPLE_DATE_FORMAT.format(calendar.getTime()))
+        mockMvc.perform(get(REST_URL + "by?date=2017-01-15")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(MATCHER.contentListMatcher(Arrays.asList(VOTE2, VOTE1)))
@@ -119,10 +117,7 @@ public class VoteControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAllByDateNotAcceptable() throws Exception {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2017, 0, 15, 0, 0, 0);
-
-        mockMvc.perform(get(REST_URL + "by?date=" + SIMPLE_DATE_FORMAT.format(calendar.getTime()))
+        mockMvc.perform(get(REST_URL + "by?date=2017-01-15")
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isNotAcceptable())
                 .andDo(print());

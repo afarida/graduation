@@ -1,13 +1,16 @@
 package uz.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import uz.TestUtil;
 import uz.model.Restaurant;
 import uz.util.exception.NotFoundException;
 
 import java.util.Arrays;
 
 import static uz.RestaurantTestData.*;
+import static uz.UserTestData.ADMIN;
 
 /**
  * Created by Admin on 20.02.2017.
@@ -16,6 +19,11 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
 
     @Autowired
     private RestaurantService service;
+
+    @Before
+    public void setUp(){
+        TestUtil.mockAuthorize(ADMIN);
+    }
 
     @Test
     public void testDelete() throws Exception {

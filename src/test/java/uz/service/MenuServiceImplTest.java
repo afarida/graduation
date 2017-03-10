@@ -1,7 +1,9 @@
 package uz.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import uz.TestUtil;
 import uz.model.Menu;
 import uz.util.exception.NotFoundException;
 
@@ -11,6 +13,7 @@ import java.util.Calendar;
 import static uz.MenuTestData.*;
 import static uz.MenuTestData.MATCHER;
 import static uz.RestaurantTestData.*;
+import static uz.UserTestData.ADMIN;
 
 /**
  * Created by Admin on 22.02.2017.
@@ -20,6 +23,11 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Autowired
     private MenuService service;
+
+    @Before
+    public void setUp(){
+        TestUtil.mockAuthorize(ADMIN);
+    }
 
     @Test
     public void testDelete() throws Exception {

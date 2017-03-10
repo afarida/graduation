@@ -8,11 +8,14 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import uz.model.User;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Admin on 01.03.2017.
  */
 public class TestUtil {
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("YYYY-MM-DD");
+
     public static ResultActions print(ResultActions action) throws UnsupportedEncodingException {
         System.out.println(getContent(action));
         return action;
